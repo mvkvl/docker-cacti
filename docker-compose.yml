@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  db:
+    build: .
+    container_name: cacti
+    hostname: cacti
+    image: mvkvl/cacti
+    environment:
+        - TZ=Asia/Tokyo
+        - MYSQL_ROOT_USER=admin
+        - MYSQL_ROOT_PASSWORD=admin
+    volumes:
+        - ./container/conf:/etc/mysql/conf.d:ro
+        - ./container/data:/var/lib/mysql
+        - ./container/env:/opt/env:ro
+        - ./scripts/env:/opt/scripts/env:ro
+    ports:
+        - 3306:3306
